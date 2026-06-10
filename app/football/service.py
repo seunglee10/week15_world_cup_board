@@ -1,4 +1,6 @@
 from app.football.data import PLAYERS
+from app.football.match_data import MATCHES
+
 
 def normalize_text(text: str) -> str:
     return text.lower().replace(" ", "").replace("-", "")
@@ -17,6 +19,7 @@ def search_players(name: str) -> list[dict]:
 
     return results
 
+
 def get_team_players(country: str) -> list[dict]:
     normalized_country = normalize_text(country)
 
@@ -27,5 +30,23 @@ def get_team_players(country: str) -> list[dict]:
 
         if normalized_country in normalized_player_country:
             results.append(player)
+
+    return results
+
+
+def get_match_schedule(country: str) -> list[dict]:
+    normalized_country = normalize_text(country)
+
+    results = []
+
+    for match in MATCHES:
+        normalized_home_team = normalize_text(match["home_team"])
+        normalized_away_team = normalize_text(match["away_team"])
+
+        if (
+            normalized_country in normalized_home_team
+            or normalized_country in normalized_away_team
+        ):
+            results.append(match)
 
     return results
