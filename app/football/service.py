@@ -1,11 +1,20 @@
 from app.football.repository import get_players, get_matches
-
+from app.football import external_api
 
 def normalize_text(text: str) -> str:
     return text.lower().replace(" ", "").replace("-", "")
 
 
 def search_players(name: str) -> list[dict]:
+    try:
+        api_players = external_api.fetch_players_by_name(name)
+
+        if api_players:
+            return api_players
+
+    except Exception:
+        pass
+
     normalized_search_name = normalize_text(name)
 
     results = []
@@ -17,7 +26,6 @@ def search_players(name: str) -> list[dict]:
             results.append(player)
 
     return results
-
 
 def get_team_players(country: str) -> list[dict]:
     normalized_country = normalize_text(country)

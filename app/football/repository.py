@@ -12,3 +12,10 @@ def get_matches() -> list[dict]:
         return external_api.fetch_worldcup_matches()
     except Exception:
         return MATCHES
+    
+
+def search_players(name: str) -> list[dict]:
+    try:
+        return external_api.fetch_players_by_name(name)
+    except Exception:
+        return get_players()

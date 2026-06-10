@@ -42,3 +42,47 @@ def parse_match(raw_match: dict) -> dict:
         "away_team": teams["away"]["name"],
         "stadium": fixture["venue"]["name"],
     }
+
+
+def fetch_players_by_name(name: str) -> list[dict]:
+    if len(name.strip()) < 4:
+        return []
+
+    url = f"{BASE_URL}/players"
+
+    headers = {
+        "x-apisports-key": settings.API_FOOTBALL_KEY
+    }
+
+    params = {
+        "search": name,
+        "season": 2022,
+        "league": 1,
+    }
+
+    response = requests.get(url, headers=headers, params=params)
+    response.raise_for_status()
+
+    data = response.json()
+
+    players = []
+
+    for item in data["response"]:
+        player = item["player"]
+
+        players.append(
+            {
+                "name": player.get("name"),
+                "country": player.get("nationality"),
+                "position": None,
+                "number": None,
+                "club": None,
+                "league": None,
+                "birth_date": player.get("birth", {}).get("date"),
+                "height_cm": player.get("height"),
+                "weight_kg": player.get("weight"),
+                "image_url": player.get("photo"),
+            }
+        )
+
+    return players
