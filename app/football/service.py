@@ -16,3 +16,16 @@ def search_players(name: str) -> list[dict]:
             results.append(player)
 
     return results
+
+def get_team_players(country: str) -> list[dict]:
+    normalized_country = normalize_text(country)
+
+    results = []
+
+    for player in PLAYERS:
+        normalized_player_country = normalize_text(player["country"])
+
+        if normalized_country in normalized_player_country:
+            results.append(player)
+
+    return results
