@@ -1,5 +1,26 @@
-FOOTBALL_TEAMS = [
-    {"id": 1, "name": "FC Seoul", "league": "K League 1"},
-    {"id": 2, "name": "Ulsan HD", "league": "K League 1"},
-    {"id": 3, "name": "Jeonbuk Hyundai Motors", "league": "K League 1"},
+PLAYERS = [
+    {
+        "name": "Son Heung-min",
+        "country": "Korea Republic",
+        "position": "Forward",
+        "number": 7,
+        "club": "LAFC",
+        "league": "MLS",
+        "birth_date": "1992-07-08",
+        "height_cm": 183,
+        "weight_kg": 78,
+        "image_url": "https://example.com/son.jpg",
+    },
+    {
+        "name": "Kylian Mbappe",
+        "country": "France",
+        "position": "Forward",
+        "number": 10,
+        "club": "Real Madrid",
+        "league": "La Liga",
+        "birth_date": "1998-12-20",
+        "height_cm": 178,
+        "weight_kg": 75,
+        "image_url": "https://example.com/mbappe.jpg",
+    },
 ]
